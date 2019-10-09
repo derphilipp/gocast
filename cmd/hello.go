@@ -1,27 +1,12 @@
-/*
-Copyright © 2019 NAME HERE <EMAIL ADDRESS>
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
 package cmd
 
 import (
 	"strings"
 
+	"github.com/derphilipp/gocast/cast"
 	"github.com/spf13/cobra"
 )
 
-// helloCmd represents the hello command
 var searchCmd = &cobra.Command{
 	Use:   "search []",
 	Short: "Search for elements",
@@ -38,27 +23,35 @@ gocast search podcast DE Triumvirat`,
 	Run: func(cmd *cobra.Command, args []string) {
 		searchterm := strings.Join(args[1:], " ")
 		countrycode := args[0]
-		SearchPodcast(searchterm, countrycode)
+		cast.SearchPodcast(searchterm, countrycode)
 	},
 }
 
 var globalrankCmd = &cobra.Command{
 	Use:   "globalrank COUNTRYCODE ID",
-	Short: "Display rank of podcast of all podcasts in given country",
+	Short: "Display rank of a podcasts a genre in a given country",
+	Long: `Search a podcast on the Apple podcast charts.
+Print rank if found, else return errorcode to os. For example:
+
+gocast globalrank DE 1220156551`,
 	Run: func(cmd *cobra.Command, args []string) {
 		podcastID := strings.Join(args[1:], " ")
 		countrycode := args[0]
-		printPodcastGlobalRank(podcastID, countrycode)
+		cast.PrintPodcastGlobalRank(podcastID, countrycode)
 	},
 }
 var genrerankCmd = &cobra.Command{
 	Use:   "genrerank COUNTRYCODE GENREID ID",
-	Short: "Display rank of podcast of all podcasts in given country",
+	Short: "Display rank of a podcasts in a given country within its genre",
+	Long: `Search a podcast on the Apple podcast charts if a give genre.
+Print rank if found, else return errorcode to os. For example:
+
+gocast genrerank DE 1487 1220156551`,
 	Run: func(cmd *cobra.Command, args []string) {
 		podcastID := strings.Join(args[2:], " ")
 		genreID := args[1]
 		countrycode := args[0]
-		printPodcastGenreRank(podcastID, genreID, countrycode)
+		cast.PrintPodcastGenreRank(podcastID, genreID, countrycode)
 	},
 }
 

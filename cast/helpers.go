@@ -1,4 +1,4 @@
-package cmd
+package cast
 
 import (
 	"io/ioutil"

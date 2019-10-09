@@ -1,4 +1,4 @@
-package cmd
+package cast
 
 import (
 	"encoding/json"
@@ -26,7 +26,7 @@ func findPodcastInCharts(podcastID string, pc *podcastCharts) (bool, int) {
 	return false, 0
 }
 
-func printPodcastGlobalRank(podcastID, countryCode string) {
+func PrintPodcastGlobalRank(podcastID, countryCode string) {
 	countryCode = validateCountryCode(countryCode)
 	url := buildPodcastChartURL(countryCode)
 	body := loadBodyfromURL(url)

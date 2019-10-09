@@ -1,4 +1,4 @@
-package cmd
+package cast
 
 import (
 	"encoding/json"
@@ -7,8 +7,6 @@ import (
 	"net/url"
 	"os"
 )
-
-
 
 func buildPodcastGenreChartURL(countryCode, genreID string) string {
 	baseURL, err := url.Parse(fmt.Sprintf("https://itunes.apple.com/%s/rss/toppodcasts/limit=200/genre=%s/explicit=true/json", countryCode, genreID))
@@ -28,8 +26,7 @@ func findPodcastInGenreCharts(podcastID string, pc *podcastGenreCharts) (bool, i
 	return false, 0
 }
 
-
-func printPodcastGenreRank(podcastID, genreID, countryCode string) {
+func PrintPodcastGenreRank(podcastID, genreID, countryCode string) {
 	countryCode = validateCountryCode(countryCode)
 	url := buildPodcastGenreChartURL(countryCode, genreID)
 	body := loadBodyfromURL(url)
