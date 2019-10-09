@@ -35,8 +35,8 @@ Print rank if found, else return errorcode to os. For example:
 
 gocast globalrank DE 1220156551`,
 	Run: func(cmd *cobra.Command, args []string) {
-		podcastID := strings.Join(args[1:], " ")
 		countrycode := args[0]
+		podcastID := strings.Join(args[1:], " ")
 		cast.PrintPodcastGlobalRank(podcastID, countrycode)
 	},
 }
@@ -48,9 +48,9 @@ Print rank if found, else return errorcode to os. For example:
 
 gocast genrerank DE 1487 1220156551`,
 	Run: func(cmd *cobra.Command, args []string) {
-		podcastID := strings.Join(args[2:], " ")
-		genreID := args[1]
 		countrycode := args[0]
+		genreID := args[1]
+		podcastID := strings.Join(args[2:], " ")
 		cast.PrintPodcastGenreRank(podcastID, genreID, countrycode)
 	},
 }
