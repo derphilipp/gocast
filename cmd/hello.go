@@ -1,10 +1,11 @@
 package cmd
 
 import (
-	"strings"
-
+	"fmt"
 	"github.com/derphilipp/gocast/cast"
+	"github.com/derphilipp/gocast/version"
 	"github.com/spf13/cobra"
+	"strings"
 )
 
 var searchCmd = &cobra.Command{
@@ -55,10 +56,24 @@ gocast genrerank DE 1487 1220156551`,
 	},
 }
 
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print the version number of gocast",
+	Long:  `All software has versions. This is gocast`,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Build Date:", version.BuildDate)
+		fmt.Println("Git Commit:", version.GitCommit)
+		fmt.Println("Version:", version.Version)
+		fmt.Println("Go Version:", version.GoVersion)
+		fmt.Println("OS / Arch:", version.OsArch)
+	},
+}
+
 func init() {
 	rootCmd.AddCommand(searchCmd)
 	rootCmd.AddCommand(globalrankCmd)
 	rootCmd.AddCommand(genrerankCmd)
+	rootCmd.AddCommand(versionCmd)
 	searchCmd.AddCommand(searchPodcastCmd)
 	// Here you will define your flags and configuration settings.
 
