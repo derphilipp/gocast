@@ -22,3 +22,6 @@ clean:
 test:
 	go test ./...
 
+ci-lint:
+	test -z "`gofmt -l .`"
+	test -z "`golint ./...`"

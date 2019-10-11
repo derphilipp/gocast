@@ -18,22 +18,21 @@ jobs:
       before_install:
         - go get -u golang.org/x/lint/golint
       script:
-        - test -z "`gofmt -l .`"
-        - test -z "`golint ./...`"
+        - make ci-lint
 
     - name: macOS build
       stage: build
       os: osx
       script:
         - make build
-        - ./gocast version
+        - ./bin/gocast version
 
     - name: linux build
       stage: build
       os: linux
       script:
         - make build
-        - ./gocast version
+        - ./bin/gocast version
 
     - name: windows build
       stage: build
@@ -42,7 +41,8 @@ jobs:
         - choco install make
       script:
         - make build
-        - ./gocast version
+        - dir
+        - dir bin
 
     # - stage: deploy
     #   name: "Deployment"

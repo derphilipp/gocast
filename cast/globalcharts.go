@@ -26,6 +26,7 @@ func findPodcastInCharts(podcastID string, pc *podcastCharts) (bool, int) {
 	return false, 0
 }
 
+// PrintPodcastGlobalRank prints a given Podcast (via ID) inside the global charts of the given country
 func PrintPodcastGlobalRank(podcastID, countryCode string) {
 	countryCode = validateCountryCode(countryCode)
 	url := buildPodcastChartURL(countryCode)

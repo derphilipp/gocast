@@ -4,6 +4,8 @@
 
 ### Go ###
 # Binaries for programs and plugins
+bin/
+gocast
 *.exe
 *.exe~
 *.dll

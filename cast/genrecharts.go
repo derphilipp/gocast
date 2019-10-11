@@ -26,6 +26,7 @@ func findPodcastInGenreCharts(podcastID string, pc *podcastGenreCharts) (bool, i
 	return false, 0
 }
 
+// PrintPodcastGenreRank prints a given Podcast (via ID) inside the genrecharts of the given country
 func PrintPodcastGenreRank(podcastID, genreID, countryCode string) {
 	countryCode = validateCountryCode(countryCode)
 	url := buildPodcastGenreChartURL(countryCode, genreID)
