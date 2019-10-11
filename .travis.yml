@@ -1,4 +1,51 @@
+---
 language: go
 
+stages:
+  - build
+  # - deploy
+
 go:
-  - master
+  - 1.13.1
+
+before_install:
+  - go get -u golang.org/x/lint/golint
+  - make get-deps
+
+jobs:
+  include:
+    - name: macOS build
+      stage: build
+      os: osx
+      script:
+        - make build
+
+    - name: linux build
+      stage: build
+      os: linux
+      script:
+        - make build
+
+    - name: windows build
+      stage: build
+      os: windows
+      before_install:
+        - choco install make
+      script:
+        - make build
+
+    # - stage: deploy
+    #   name: "Deployment"
+    #   if: tag IS present
+    #   script: make release
+    #   deploy:
+    #     provider: releases
+    #     overwrite: true
+    #     file:
+    #       - a
+    #       - b
+    #       - c
+    #     skip_cleanup: true
+    #     on:
+    #       repo: derphilipp/gocast
+    #       tags: true
