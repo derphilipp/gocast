@@ -2,29 +2,38 @@
 language: go
 
 stages:
+  - lint
   - build
   # - deploy
 
 go:
   - 1.13.1
 
-before_install:
-  - go get -u golang.org/x/lint/golint
-  - make get-deps
 
 jobs:
   include:
+    - name: lint
+      stage: lint
+      os: linux
+      before_install:
+        - go get -u golang.org/x/lint/golint
+      script:
+        - test -z "`gofmt -l .`"
+        - test -z "`golint ./...`"
+
     - name: macOS build
       stage: build
       os: osx
       script:
         - make build
+        - ./gocast version
 
     - name: linux build
       stage: build
       os: linux
       script:
         - make build
+        - ./gocast version
 
     - name: windows build
       stage: build
@@ -33,6 +42,7 @@ jobs:
         - choco install make
       script:
         - make build
+        - ./gocast version
 
     # - stage: deploy
     #   name: "Deployment"
